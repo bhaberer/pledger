@@ -8,25 +8,26 @@ require 'hipchat'
 require 'psych'
 
 require 'pledger/pledge'
+require 'pledger/watcher'
 require 'pledger/client'
 require 'pledger/client/hipchat'
 require 'pledger/project'
 require 'pledger/project/indiegogo'
 
 module Pledger
-  def self.log(text, project = @proj)
+  def Pledger.log(text, project = @proj)
      puts "[Pledger] [#{Time.now.strftime("%Y.%m.%d@%H:%M:%S")}] #{text}"
   end
 
-  def tail(projectclient, chatclient)
+  def Pledger.start(project, chatclient)
     @proj = ''
     # Cache all the current pledges so the bot doesn't spam old shit.
-    Pledger.log "Caching current pledges for #{@proj}"
+    Pledger.log "Caching current pledges for #{project.project_id}"
     @pledges = projectclient.get_pledges.map(&:cache)
     Pledger.log "Cached #{@pledges.length} old pledges."
 
     # Let's start looking for pledges
-    Pledger.log "Watching for new pledges for #{@proj}..."
+    Pledger.log "Watching for new pledges for #{project.project_id}..."
 
     while true do
       queue = []
