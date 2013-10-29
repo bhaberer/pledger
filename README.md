@@ -21,7 +21,7 @@ Or install it yourself as:
 ```
 require 'pledger'
 
-client = Pledger::Hipchat.new(HIPCHAT_APIKEY, 'Bot')
+client = Pledger::Hipchat.new(HIPCHAT_APIKEY, 'CHAN_NAME')
 project = Pledger::Indiegogo.new(PROJECTNAME)
 Pledger::Watcher.new(client, project).start
 
