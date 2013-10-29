@@ -18,7 +18,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+`require 'pledger'
+client = Pledger::Hipchat.new(HIPCHAT_APIKEY, 'Bot')
+project = Pledger::Indiegogo.new(PROJECTNAME)
+Pledger::Watcher.new(client, project).start
+[Pledger] [2013.10.29@14:58:40] Caching current pledges for PROJECTNAME
+[Pledger] [2013.10.29@14:58:40] Cached 38 old pledges.
+[Pledger] [2013.10.29@14:58:40] Watching for new pledges for PROJECTNAME`
 
 ## Contributing
 
