@@ -19,6 +19,18 @@ module Pledger
       end
 
       return pledges
+    rescue Timeout::Error, OpenURI::HTTPError
+      puts 'Timed out trying to get pledges, retrying...'
+      return self.pledges
     end
+
+    def total
+      url = "http://www.indiegogo.com/projects/#{@project_id}"
+      doc = Nokogiri::HTML(open(url))
+      begin
+        return doc.css('.money-raised span span span').first.text
+      end
+    end
+
   end
 end

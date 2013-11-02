@@ -13,7 +13,7 @@ module Pledger
       @client = HipChat::Client.new(@apikey)
     end
 
-    def post_message(text)
+    def send(text)
       @client[@channel].send(@nick, text, color: @color, notify: @notify)
     end
   end

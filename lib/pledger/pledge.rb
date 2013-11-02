@@ -9,7 +9,6 @@ module Pledger
       @level = level
     end
 
-
     def id
       self.name.downcase.gsub(/\s/, '_')
     end
@@ -17,7 +16,7 @@ module Pledger
     def format_text
       text = ["#{@name} just pledged"]
       text << (@amount == '' ? 'an undisclosed amount' : @amount)
-      text << "(#{@level})" unless (@level == '' || @level.nil?) 
+      text << "#{@level}" unless (@level == '' || @level.nil?) 
       return text.join(' ')
     end
 

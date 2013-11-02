@@ -37,7 +37,7 @@ module Pledger
 
         queue.each do |post|
           log post
-          client.send_message(post)
+          client.send(post)
         end
 
         sleep @delay
