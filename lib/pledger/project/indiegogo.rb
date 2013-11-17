@@ -15,12 +15,15 @@ module Pledger
           level = pledge.css('.pledge-amount .perk-received').text
 
           pledges << Pledger::Pledge.new(name, amount, level)
+        rescue
+          Pledger.log 'Encountered Error logging pledge...'
         end
+
       end
 
       return pledges
     rescue Timeout::Error, OpenURI::HTTPError
-      puts 'Timed out trying to get pledges, retrying...'
+      Pledger.log 'Timed out trying to get pledges, retrying...'
       return self.pledges
     end
 
@@ -31,6 +34,5 @@ module Pledger
         return doc.css('.money-raised span span span').first.text
       end
     end
-
   end
 end
