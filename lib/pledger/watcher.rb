@@ -26,7 +26,7 @@ module Pledger
         project.pledges.each do |pledge|
           unless pledge.cached?
             pledge_text = pledge.format_text
-            pledge_text << "[Total: #{project.total}]" unless project.total.nil?
+            pledge_text << " [Total: #{project.total}]" unless project.total.nil?
             queue << pledge_text
             pledge.cache
             Pledger.log "New pledge cached."
@@ -35,7 +35,7 @@ module Pledger
 
         queue.each do |post|
           Pledger.log post
-          client.send(post, total: project.total)
+          client.send(post)
         end
 
         sleep @delay
